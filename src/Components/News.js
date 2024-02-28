@@ -12,14 +12,19 @@ export default class News extends Component {
     country:PropTypes.string,
     category:PropTypes.string
   };
+  capitalize=(string)=>{
+     return string.toUpperCase();
+  }
   
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state={
     articles:this.articles,
     loading:false,
     page :1
+    
     };
+    document.title = `NewsPrime - ${this.capitalize(this.props.category)}`
   }
   async componentDidMount(){
     let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=9046f967c479402984a6612f52c7c11d&page=1`;
@@ -56,7 +61,7 @@ export default class News extends Component {
     return (
       <div className='container ' >
        
-        <h1  className="text-center"style={{margin:"4vh"}}>NewsPrime : Top Headlines !!</h1>
+        <h1  className="text-center m-5"style={{margin:"4vh"}}>NewsPrime : Top Headlines !!</h1>
         <div className='row' >
         {this.state.articles ?.map((element)=>{
           return <div className='col-md-4' key={element.url}>
